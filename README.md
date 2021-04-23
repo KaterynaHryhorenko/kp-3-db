@@ -13,26 +13,26 @@
 4. Залогіньте свій акаунт heroku
 * heroku login
 5. Створіть heroku арр
-*heroku create
+* heroku create
 6. Створіть базу даних для додатку
-*heroku addons:create heroku-postgresql:hobby-dev
-*heroku config -s
+* heroku addons:create heroku-postgresql:hobby-dev
+* heroku config -s
 7. Вимкніть Collectstatic і перенесіть файли на heroku.
-*heroku config:set DISABLE_COLLECTSTATIC=1
-*git push heroku main
+* heroku config:set DISABLE_COLLECTSTATIC=1
+* git push heroku main
 8. Запускаєте файл
-*python manage.py migrate
+* python manage.py migrate
 9. Відкриваєте консоль
-*heroku run bush
+* heroku run bush
 10. Робите міграцію у базу
-*manage.py migrate
+* manage.py migrate
 11. Створюєте користувача
-*manage.py createsuperuser
+* manage.py createsuperuser
 (логін, пароль бажано admin, 123pass123,бо в підказці html саме ці логін та пароль)
 12. Заповнєте базу виконавцями
-*manage.py import_from_csv aug_train.csv
+* manage.py import_from_csv aug_train.csv
 13. Відкриваєте сайт 
-*heroku open
+* heroku open
 
 
 Приклад сайту, що розгорнула я
