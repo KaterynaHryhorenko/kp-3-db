@@ -17,7 +17,7 @@
 6.Створіть базу даних для додатку
 *heroku addons:create heroku-postgresql:hobby-dev
 *heroku config -s
-7. Вимкніть Collectstatic і перенесіть файли на heroku.
+7.Вимкніть Collectstatic і перенесіть файли на heroku.
 *heroku config:set DISABLE_COLLECTSTATIC=1
 *git push heroku main
 8.Запускаєте файл
@@ -33,6 +33,8 @@
 *manage.py import_from_csv aug_train.csv
 13.Відкриваєте сайт 
 *heroku open
+
+
 Приклад сайту, що розгорнула я
 https://pacific-shore-49299.herokuapp.com/
 Схема бази даних в файлі diagram.png
