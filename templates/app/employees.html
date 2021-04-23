@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {% if qualification.profile %}
+    {{ qualification.profile }}
+  {% else %}
+    Employees
+  {% endif %}
+{% endblock title %}
+
+
+{% block content %}
+  <div class="text-center">
+    <h1 class="mb-5">
+    {% if qualification %}
+    Employees with the qualification - <b>{{ qualification.profile }}</b>
+    {% else %}
+    Employees
+    {% endif %}
+    </h1>
+  </div>
+
+  
+  <div class="alert alert-secondary" role="alert">
+    {% if user.is_authenticated %}
+      You have administrator rights. So you can edit or delete items or 
+      <a href="{% url 'employee_add' %}" class="btn btn-primary btn-sm">
+        <b>+ add</b></a>
+      </a>
+      new ones.
+    {% else %}
+    You do not have administrator rights. So you can anly 
+      <a href="{% url 'employee_add' %}" class="btn btn-primary btn-sm">
+        <b>+ add</b></a>
+      </a>
+      new employee.
+    {% endif %}
+  </div>
+  
+
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th>Gender</th>
+        <th>Enrolled University</th>
+        <th>Education Level</th>
+        <th>Major discipline</th>
+        <th>Experience</th>
+        <th>Company Type</th>
+        <th>Last New Job</th>
+        <th>Training Hours</th>
+        <th>Target</th>
+        {% if user.is_authenticated %}
+        <th>Edit / Delete</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for employee in employees %}
+        <tr>
+          <td>{{ employee.gender }}</td>
+          <td>{{ employee.enrolled_university }}</td>
+          <td>{{ employee.education_level }}</td>
+          <td>{{ employee.major_discipline }}</td>
+          <td>{{ employee.experience }}</td>
+          <td>{{ employee.company_type }}</td>
+          <td>{{ employee.last_new_job }}</td>
+          <td>{{ employee.training_hours }}</td>
+          <td>{{ employee.target }}</td>
+          {% if user.is_authenticated %}
+          <td>
+            <a href="{{ employee.get_edit_url }}" class="btn btn-outline-success mb-2">
+              <i class="bi bi-pencil-square"></i>
+            </a>
+            <a href="{{ employee.get_delete_url }}" class="btn btn-outline-danger list-inline-item">
+              <i class="bi bi-x-circle-fill"></i>
+            </a>
+          </td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if is_paginated %}
+    <nav aria-label="pagination">
+      <ul class="pagination justify-content-end">
+        <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+          <a 
+            class="page-link"
+            href="?page=1"
+            abindex="-1" 
+            aria-disabled="true"
+          >
+            <<
+          </a>
+        </li>
+        <li class="page-item {% if not page_obj.has_previous %}disabled {% endif %}">
+          <a 
+            class="page-link" 
+            href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}" 
+            tabindex="-1" 
+            aria-disabled="true"
+          >
+            Previous
+          </a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+        <li class="page-item {% if not page_obj.has_next %}disabled {% endif %}">
+          <a 
+            class="page-link" 
+            href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}"
+          >
+            Next
+          </a>
+        </li>
+        <li class="page-item {% if not page_obj.has_next %}disabled {% endif %}">
+          <a class="page-link" href="?page={{page_obj.paginator.num_pages}}">>></a>
+        </li>
+      </ul>
+    </nav>
+  {% endif %}
+
+{% endblock content %}
+

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home Page
+{% endblock title %}
+
+{% block content %}
+<div class="jumbotron text-center">
+  <h1>On <b>FindMe</b> you can find <a href="{% url 'employee_list' %}" class="badge badge-dark badge-pill">{{count}}</a> employees!</h1>
+  <hr class="my-4">
+  <ul class="list-group mx-5">
+    {% for qualification in qualifications %}
+      <a href="{{qualification.get_absolute_url}}" class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center">
+        {{ qualification.profile }}
+        <span class="badge badge-dark badge-pill">{{qualification.count_of_employees}}</span>
+      </a>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}
